@@ -63,7 +63,8 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         # 'DIRS': [],
-        'DIRS': [os.path.join(BASE_DIR, 'web/templates')],
+        # esta configuracion se escribe para dejar una sola ruta en mi proyecto
+        'DIRS': [os.path.join(BASE_DIR, 'web/templates')], 
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

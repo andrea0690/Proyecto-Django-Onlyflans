@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{%block 'Contenido' %}
+    <h1 class="text-center"> contacto</h1>
+    <form method="POST"> 
+        {% csrf_token %}
+        {{form.non_field_errors}}
+
+        <div class="text-center mb-3">
+            {{form.customer_email.label_tag}}
+            {{form.customer_email}}
+            <div class="text-danger">{{form.customer_email.errors}}</div>
+        </div>
+
+        <div class="text-center mb-3">
+            {{form.customer_name.label_tag}}
+            {{form.customer_name}}
+            <p class="text-warning bg-dark">{{form.customer_name.errors}}</p>
+        </div>
+
+        <div class="text-center mb-3">
+            {{form.message.label_tag}}
+            {{form.message}}
+            <p class="text-warning bg-dark">{{form.message.errors}}</p>
+        </div>
+
+        <div class="text-center mb-3">
+            <button class="btn btn-primary" type="submit">Enviar</button>
+        </div>
+      </form>
+
+{% endblock 'Contenido' %}

@@ -1,7 +1,25 @@
 {% extends 'base.html' %}
 
 {% block 'Contenido' %}
-    <h1>Indice</h1> <!-- aquí pones lo que quieras mostrar -->
+    <div id="nav_destacados" class="container">
+        <div class="row">
+          <h2 class="text-center mt-3">UN FLAN PARA CADA DIA</h2> 
+            {% for flan in flanes %}
+                {% if not flan.is_private %}
+                <div class="col-12 col-sm-3 py-2">
+                    <div class="card" style="width: 18rem;">
+                        <img  style="height: 12rem;" src="{{flan.image_url}}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                        <h5 class="card-title">{{flan.name}}</h5>
+                        <p class="card-text">{{flan.description}}</p>
+                        <a href="#" class="btn btn-primary">Ver más</a>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}
 
 
