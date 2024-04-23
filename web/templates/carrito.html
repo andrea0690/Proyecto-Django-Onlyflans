@@ -1,0 +1,89 @@
+{% extends 'base.html' %} {% block 'Contenido' %}
+<div id="quienes_somos" class="container bg-black d-none d-sm-block">
+  <div class="row">
+    <h2 class="text-center mt-3 titulos">Carrito de compras</h2>
+    <section class="h-100" style="background-color: #eee">
+      <div class="container h-100 py-5">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+          <div class="col-10">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+              <h3 class="fw-normal mb-0 text-black">Articulos seleccionados</h3>
+              <div>
+                <p class="mb-0">
+                  <span class="text-muted">Fecha de creación:</span>
+                  <a href="#!" class="text-body"
+                    >{{carrito.fecha_creacion}} <i class="fas fa-angle-down mt-1"></i
+                  ></a>
+                </p>
+              </div>
+            </div>
+
+            {% for item in items %}
+                <div class="card rounded-3 mb-4">
+                <div class="card-body p-4">
+                    <div
+                    class="row d-flex justify-content-between align-items-center"
+                    >
+                    <div class="col-md-2 col-lg-2 col-xl-2">
+                        <img
+                        src="{{item.flan.image_url}}"
+                        class="img-fluid rounded-3"
+                        alt="{{item.flan.name}}"
+                        />
+                    </div>
+                    <div class="col-md-3 col-lg-3 col-xl-3">
+                        <p class="lead fw-normal mb-2">{{item.flan.name}}</p>
+                        <p>
+                        <span id="precio_{{item.id}}" class="text-muted"
+                            >Precio: {{item.flan.precio}}</span
+                        >
+                        </p>
+                    </div>
+                    <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+                        <input
+                        id="form_{{item.id}}"
+                        min="0"
+                        name="quantity"
+                        value="{{item.cantidad}}"
+                        type="number"
+                        class="form-control form-control-sm"
+                        />
+                    </div>
+                    <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+                        <h5 id="total_{{item.id}}" class="mb-0">${{ item.total }}</h5>
+                    </div>
+                    <div class="col-md-1 col-lg-1 col-xl-1 text-end">
+                        <a href="#!" class="text-danger"
+                        ><i class="fas fa-trash fa-lg"></i
+                        ></a>
+                    </div>
+                    </div>
+                </div>
+                </div>
+            {% endfor %}
+
+            <div class="card">
+                <div class="card-body d-flex justify-content-between align-items-center">
+                    <button
+                      id="generar_orden"
+                      type="button"
+                      data-uuid="{{ carrito.carrito_uuid }}"
+                      data-csrf_token="{{ csrf_token }}"
+                      class="btn btn-primary btn-lg"
+                    >
+                      Generar orden
+                    </button>
+                    
+                    <!-- Contenedor para el texto total -->
+                    <div>
+                      <h5 id="total_final" class="mb-0">Total: $9.000</h5>  <!-- Texto alineado al lado del botón -->
+                    </div>
+                  </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+{% endblock %}
