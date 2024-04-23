@@ -59,6 +59,33 @@ $("#add_cart").on("click", function () {
     .catch((error) => console.error("Error al agregar al carrito:", error)); // Manejo de errores
 });
 
+
+$("#generar_orden").on("click", function () {
+  const { uuid, csrf_token } = $("#generar_orden").data();
+  fetch("/carrito_change_status/" + uuid, {
+      method: "POST",
+      headers: {
+          "Content-Type": "application/json",
+          "X-CSRFToken": csrf_token,
+        },
+    })
+    .then((response) => response.json())
+    .then((data) => {
+        if (data.success) {
+            Swal.fire({
+                position: "top",
+                icon: "success",
+                title: data.message,
+                showConfirmButton: true,
+            }).then((result) => {
+                window.location.href = "/welcome";
+            });
+        } else {
+            console.error(data.message); // Manejo de error
+        }
+    });
+});
+
 $('input[id^="form_"]').on("click", function () {
   const buttonId = $(this).attr("id");
   const itemId = buttonId.replace("form_", "");
@@ -105,29 +132,3 @@ $('input[id^="form_"]').on("change keyup", function () {
 
 // Calcular el total al cargar la página, por si ya hay valores existentes
 calcularTotal();
-
-$("#generar_orden").on("click", function () {
-  const { uuid, csrf_token } = $("#generar_orden").data();
-  fetch("/carrito_change_status/" + uuid, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "X-CSRFToken": csrf_token,
-    },
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      if (data.success) {
-        Swal.fire({
-          position: "top",
-          icon: "success",
-          title: data.message,
-          showConfirmButton: true,
-        }).then((result) => {
-          window.location.href = "/welcome";
-        });
-      } else {
-        console.error(data.message); // Manejo de error
-      }
-    });
-});

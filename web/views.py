@@ -107,7 +107,7 @@ def agregar_carrito(request):
             'message': 'Método no permitido.',
         })
     
-def usuarios(request):
+def registro(request):
     if request.method == 'POST':
         form = UserForm(request.POST)
         if form.is_valid():

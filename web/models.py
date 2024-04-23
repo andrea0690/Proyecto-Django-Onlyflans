@@ -46,7 +46,7 @@ class Carrito(models.Model):
 
 class CarritoItem(models.Model):
     carrito = models.ForeignKey(Carrito, on_delete=models.CASCADE, related_name='items')
-    flan = models.ForeignKey('Flan', on_delete=models.CASCADE)  # Relación con Flan
+    flan = models.ForeignKey(Flan, on_delete=models.CASCADE)  # Relación con Flan
     cantidad = models.PositiveIntegerField(default=1)  # Cantidad de cada producto en el carrito
 
     def __str__(self):

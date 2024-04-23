@@ -25,7 +25,7 @@ urlpatterns = [
     path('exito/', views.exito, name ='exito'),
     path('welcome/', views.welcome, name ='welcome'),
     path('contacto/', views.contacto, name ='contacto'),
-    path('registrate/', views.usuarios, name='registrate'),
+    path('registrate/', views.registro, name='registrate'),
     path('registration/', include('django.contrib.auth.urls')), #busca las rutas del logueo de django
     path('flan/<int:flan_id>', views.flan_detail, name='detalle'),
     path('carrito/<str:carrito_uuid>', views.carrito, name='carrito'),
